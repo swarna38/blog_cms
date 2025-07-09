@@ -2,6 +2,13 @@
     require_once '../config/connection.php';
     require_once '../includes/header.php';
 
+  if (isset($_SESSION['user_id'])) {
+    // user already logged in → redirect to dashboard (not login again)
+    header("Location: ../admin/dashboard.php");
+    exit;
+    }
+
+
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         $email = htmlspecialchars(trim($_POST['email']));
         $password = trim($_POST['password']);
