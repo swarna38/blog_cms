@@ -15,6 +15,7 @@
         $sql= $pdo->prepare("select * from users where email= ?");
         $sql->execute([$email]);
 
+        //check if already exists
         if($sql->fetch()){
             $error = 'Email already registered!';
         }else{
