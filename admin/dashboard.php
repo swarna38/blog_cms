@@ -1,22 +1,22 @@
 <?php session_start();
-    require_once '../config/connection.php';
-    require_once '../includes/header.php';
+require_once '../config/connection.php';
+require_once '../includes/header.php';
 
-    if(!isset($_SESSION['user_id'])){
-        header("Location: ../auth/login.php");
-        exit;
-    }else{
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../auth/login.php");
+    exit;
+} else {
 
-        $sql = $pdo->prepare("SELECT posts.*,
+    $sql = $pdo->prepare("SELECT posts.*,
         users.name AS author, categories.name as category
         FROM posts
         LEFT JOIN users ON posts.user_id= users.id
         LEFT JOIN categories  ON posts.category_id = categories.id 
         ORDER BY posts.created_at DESC");
 
-        $sql->execute();
-        $posts = $sql->fetchAll();
-    }
+    $sql->execute();
+    $posts = $sql->fetchAll();
+}
 
 ?>
 
@@ -37,8 +37,8 @@
             </tr>
         </thead>
         <tbody>
-            <?php if($posts){ ?> 
-                <?php foreach($posts as $post){ ?>
+            <?php if ($posts) { ?>
+                <?php foreach ($posts as $post) { ?>
                     <tr>
                         <td><?= htmlspecialchars($post['title']) ?></td>
                         <td><?= htmlspecialchars($post['author']) ?></td>
@@ -46,16 +46,16 @@
                         <td><?= date('d M Y', strtotime($post['created_at'])) ?></td>
                     </tr>
                 <?php } ?>
-            <?php }else{ ?>
-                 <tr>
+            <?php } else { ?>
+                <tr>
                     <td colspan="4" class="text-center text-muted ">
-                    You have no posts yet. <a href="add_post.php">Add one</a>
+                        You have no posts yet. <a href="add_post.php">Add one</a>
                     </td>
                 </tr>
-            <?php } ?>    
+            <?php } ?>
         </tbody>
     </table>
 </div>
-<?php 
-    require_once '../includes/footer.php';
+<?php
+require_once '../includes/footer.php';
 ?>
