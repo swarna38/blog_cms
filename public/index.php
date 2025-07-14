@@ -15,14 +15,16 @@ $posts = $sql->fetchAll();
 
 
 <div class="container">
-    <div class="row text-center py-5">
+        <h1 class="text-center text-uppercase fw-bold pt-2">show all information</h1>
+
+    <div class="row text-center py-4">
         <?php foreach ($posts as $post) { ?>
             <div class="col-4">
                 <div class="card border border-0 shadow p-4">
                     <div >
 
                     <h5>
-                        <a class="fw-bold" href="post.php?id=<?php echo htmlspecialchars($post['id']); ?>">
+                        <a class="" href="post.php?id=<?php echo htmlspecialchars($post['id']); ?>">
                             <?php echo htmlspecialchars($post['title']); ?>
                         </a>
                     </h5>
